@@ -5,7 +5,6 @@ import 'package:piscine_laghetto/screens/group_management_screen.dart';
 import 'package:piscine_laghetto/screens/login_screen.dart';
 import 'package:piscine_laghetto/screens/support_screen.dart';
 import 'package:piscine_laghetto/screens/user_management_screen.dart';
-import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
 import '../global_class.dart' as Globals;
 
