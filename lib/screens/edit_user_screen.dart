@@ -3,11 +3,12 @@ import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:piscine_laghetto/providers/group_provider.dart';
 import 'package:piscine_laghetto/providers/users_provider.dart';
 import 'package:piscine_laghetto/widgets/custom_dialog.dart';
-import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../global_class.dart' as Globals;
+
+enum Status { DEFAULT, LOADING, DONE }
 
 class EditUserScreen extends StatefulWidget {
   static const routeName = '/edit-user';
@@ -511,10 +512,11 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                       FocusScope.of(context).unfocus();
                                       if (isValid) {
                                         _formKey.currentState!.save();
-                                        // if (user.roleidfk == 4)
-                                        editUser(context, user);
-                                        // else
-                                        //    editAdmin(context, user);
+                                        editUser(context, user).whenComplete(() =>
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    Navigator.pop(context);
+                                                  }));
                                       }
                                     },
                                     child: Center(

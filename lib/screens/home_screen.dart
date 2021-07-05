@@ -28,10 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    if(Globals.isAdmin){
-    Provider.of<UsersProvider>(context, listen: false)
-        .getAllUsers(UserClass.ROLE_USER);
-    Provider.of<GroupProvider>(context, listen: false).getAllGroups();
+    if (Globals.isAdmin) {
+      Provider.of<UsersProvider>(context, listen: false)
+          .getAllUsers(UserClass.ROLE_USER);
+      Provider.of<GroupProvider>(context, listen: false).getAllGroups();
     }
     Provider.of<FileProvider>(context, listen: false).getFiles();
     Provider.of<NotificationProvider>(context, listen: false).getNotification();
@@ -108,9 +108,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Container(
                         height: 40,
-                        child: Image.asset(
-                          'images/logo.png',
-                          fit: BoxFit.contain,
+                        child: GestureDetector(
+                          onTap: () =>
+                              Provider.of<FileProvider>(context, listen: false)
+                                  .getFiles(),
+                          child: Image.asset(
+                            'images/logo.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -154,7 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                           onPressed: () {
                             FocusManager.instance.primaryFocus?.unfocus();
-                            Navigator.of(context).pushNamed(ProfileScreen.routeName);
+                            Navigator.of(context)
+                                .pushNamed(ProfileScreen.routeName);
                           },
                           icon: Icon(Icons.settings_outlined))
                     ],
@@ -186,8 +192,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor,
                                       width: 1.5)),
-                              suffixIcon:
-                                  Icon(Icons.search, color: Colors.black),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    Provider.of<FileProvider>(context,
+                                            listen: false)
+                                        .getFiles(
+                                            search: _searchController.text);
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
+                                  icon:
+                                      Icon(Icons.search, color: Colors.black)),
                               border: new OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(
                                   const Radius.circular(10.0),
@@ -227,47 +242,60 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.white,
-                  Color(0xFFe8f0fe),
-                ], begin: Alignment.topCenter, end: Alignment(0, 1.5)),
-              ),
-              height: 60,
-              width: double.infinity,
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (currentFolder != null)
-                    IconButton(
-                        constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
-                        onPressed: () {
-                          setState(() {
-                            if (parent != null)
-                              Provider.of<FileProvider>(context, listen: false)
-                                  .getFiles(folderidfk: parent.repoid);
-                            else
-                              Provider.of<FileProvider>(context, listen: false)
-                                  .getFiles();
-                          });
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        )),
-                  SizedBox(
-                    width: currentFolder != null ? 0 : 50,
-                  ),
-                  Text(
-                    currentFolder != null ? currentFolder.name : 'HOME',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3,
-                  ),
-                ],
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (parent != null)
+                    Provider.of<FileProvider>(context, listen: false)
+                        .getFiles(folderidfk: parent.repoid);
+                  else
+                    Provider.of<FileProvider>(context, listen: false)
+                        .getFiles();
+                });
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Colors.white,
+                    Color(0xFFe8f0fe),
+                  ], begin: Alignment.topCenter, end: Alignment(0, 1.5)),
+                ),
+                height: 60,
+                width: double.infinity,
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (currentFolder != null)
+                      IconButton(
+                          constraints:
+                              BoxConstraints(minWidth: 50, maxWidth: 50),
+                          onPressed: () {
+                            setState(() {
+                              if (parent != null)
+                                Provider.of<FileProvider>(context,
+                                        listen: false)
+                                    .getFiles(folderidfk: parent.repoid);
+                              else
+                                Provider.of<FileProvider>(context,
+                                        listen: false)
+                                    .getFiles();
+                            });
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                          )),
+                    SizedBox(
+                      width: currentFolder != null ? 0 : 50,
+                    ),
+                    Text(
+                      currentFolder != null ? currentFolder.name : 'HOME',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -324,7 +352,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       Provider.of<NotificationProvider>(context, listen: false)
                           .getNotification();
                     },
-                    child: FileView(listView: listView, stats: false,))),
+                    child: FileView(
+                      listView: listView,
+                      stats: false,
+                    ))),
           ],
         ),
       ),

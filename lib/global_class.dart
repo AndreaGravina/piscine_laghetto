@@ -12,6 +12,8 @@ bool isAdmin = false;
 dynamic logid;
 int time = 0;
 
+enum Status { DEFAULT, LOADING, DONE }
+
 void updateLog(dynamic newLogId, dynamic newTime) async {
   logid = newLogId;
   time = newTime;

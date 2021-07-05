@@ -3,11 +3,12 @@ import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:piscine_laghetto/providers/group_provider.dart';
 import 'package:piscine_laghetto/providers/users_provider.dart';
 import 'package:piscine_laghetto/widgets/custom_dialog.dart';
-import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../global_class.dart' as Globals;
+
+enum Status { DEFAULT, LOADING, DONE }
 
 class NewUserScreen extends StatefulWidget {
   static const routeName = '/new-user';
@@ -207,8 +208,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                 autocorrect: false,
                                 cursorColor: Theme.of(context).primaryColor,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Nome*'),
+                                decoration: InputDecoration(hintText: 'Nome*'),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Scrivi qualcosa';
@@ -227,8 +227,8 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                 autocorrect: false,
                                 cursorColor: Theme.of(context).primaryColor,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Cognome*'),
+                                decoration:
+                                    InputDecoration(hintText: 'Cognome*'),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Scrivi qualcosa';
@@ -247,8 +247,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                 autocorrect: false,
                                 cursorColor: Theme.of(context).primaryColor,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Email*'),
+                                decoration: InputDecoration(hintText: 'Email*'),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value!.isEmpty || !value.contains('@')) {
@@ -388,8 +387,8 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                 key: Key('newuser8'),
                                 autocorrect: false,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Password*'),
+                                decoration:
+                                    InputDecoration(hintText: 'Password*'),
                                 obscureText: true,
                                 controller: _passwordController,
                                 validator: (value) {
@@ -481,7 +480,11 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                       FocusScope.of(context).unfocus();
                                       if (isValid) {
                                         _formKey.currentState!.save();
-                                        createUser(context, role);
+                                        createUser(context, role).whenComplete(
+                                            () => Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  Navigator.pop(context);
+                                                }));
                                       }
                                     },
                                     child: Center(

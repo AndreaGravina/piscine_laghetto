@@ -20,7 +20,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UsersProvider>(context, listen: false).getUsers(UserClass.ROLE_ADMIN);
+    Provider.of<UsersProvider>(context, listen: false)
+        .getUsers(UserClass.ROLE_ADMIN);
     Provider.of<GroupProvider>(context, listen: false).getAllGroups();
   }
 
@@ -49,7 +50,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
           child: FloatingActionButton(
             backgroundColor: const Color(0xFF0375fe),
             onPressed: () {
-              Navigator.of(context).pushNamed(NewUserScreen.routeName, arguments: UserClass.ROLE_ADMIN);
+              Navigator.of(context).pushNamed(NewUserScreen.routeName,
+                  arguments: UserClass.ROLE_ADMIN);
             },
             child: Icon(
               Icons.add,
@@ -106,7 +108,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                         controller: _searchController,
                         onSubmitted: (value) =>
                             Provider.of<UsersProvider>(context, listen: false)
-                                .getUsers(2, search: value),
+                                .getUsers(UserClass.ROLE_ADMIN, search: value),
                         cursorColor: Theme.of(context).primaryColor,
                         textAlignVertical: TextAlignVertical.bottom,
                         style: Theme.of(context).textTheme.headline3,
@@ -119,7 +121,13 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                                   width: 1.5)),
                           suffixIcon: IconButton(
                               splashRadius: 5,
-                              onPressed: () {},
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                Provider.of<UsersProvider>(context,
+                                        listen: false)
+                                    .getUsers(UserClass.ROLE_ADMIN,
+                                        search: _searchController.text);
+                              },
                               icon: Icon(Icons.search, color: Colors.black)),
                           border: new OutlineInputBorder(
                             borderRadius: const BorderRadius.all(

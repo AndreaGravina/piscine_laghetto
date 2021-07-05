@@ -108,9 +108,7 @@ class _GroupManagementScreenState extends State<GroupManagementScreen> {
                                 .getGroups(search: value),
                         cursorColor: Theme.of(context).primaryColor,
                         textAlignVertical: TextAlignVertical.bottom,
-                        style: Theme.of(context).textTheme.headline3?.apply(
-                              color: Colors.black,
-                            ),
+                        style: Theme.of(context).textTheme.headline3,
                         decoration: new InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
@@ -120,7 +118,12 @@ class _GroupManagementScreenState extends State<GroupManagementScreen> {
                                   width: 1.5)),
                           suffixIcon: IconButton(
                               splashRadius: 5,
-                              onPressed: () {},
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                Provider.of<GroupProvider>(context,
+                                        listen: false)
+                                    .getGroups(search: _searchController.text);
+                              },
                               icon: Icon(Icons.search, color: Colors.black)),
                           border: new OutlineInputBorder(
                             borderRadius: const BorderRadius.all(

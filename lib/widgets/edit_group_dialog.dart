@@ -170,7 +170,11 @@ class _EditGroupDialogState extends State<EditGroupDialog> {
                                             FocusScope.of(context).unfocus();
                                             if (isValid) {
                                               _formKey.currentState!.save();
-                                              saveGroup(context);
+                                              saveGroup(context).whenComplete(() =>
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    Navigator.pop(context);
+                                                  }));
                                             }
                                           },
                                           child: Center(

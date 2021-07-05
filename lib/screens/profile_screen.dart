@@ -3,6 +3,7 @@ import 'package:piscine_laghetto/providers/auth_status.dart';
 import 'package:piscine_laghetto/screens/admin_management_screen.dart';
 import 'package:piscine_laghetto/screens/group_management_screen.dart';
 import 'package:piscine_laghetto/screens/login_screen.dart';
+import 'package:piscine_laghetto/screens/support_screen.dart';
 import 'package:piscine_laghetto/screens/user_management_screen.dart';
 import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
@@ -153,9 +154,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => SupportDialog());
+                         Navigator.of(context).pushNamed(SupportScreen.routeName);
                       },
                       child: Container(
                         margin: EdgeInsets.only(

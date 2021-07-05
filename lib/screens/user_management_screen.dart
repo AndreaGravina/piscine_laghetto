@@ -49,7 +49,8 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
           child: FloatingActionButton(
             backgroundColor: const Color(0xFF0375fe),
             onPressed: () {
-              Navigator.of(context).pushNamed(NewUserScreen.routeName, arguments: UserClass.ROLE_USER);
+              Navigator.of(context).pushNamed(NewUserScreen.routeName,
+                  arguments: UserClass.ROLE_USER);
             },
             child: Icon(
               Icons.add,
@@ -119,7 +120,13 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                   width: 1.5)),
                           suffixIcon: IconButton(
                               splashRadius: 5,
-                              onPressed: () {},
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                Provider.of<UsersProvider>(context,
+                                        listen: false)
+                                    .getUsers(UserClass.ROLE_USER,
+                                        search: _searchController.text);
+                              },
                               icon: Icon(Icons.search, color: Colors.black)),
                           border: new OutlineInputBorder(
                             borderRadius: const BorderRadius.all(

@@ -8,11 +8,12 @@ import 'package:piscine_laghetto/providers/group_provider.dart';
 import 'package:piscine_laghetto/providers/tags_provider.dart';
 import 'package:piscine_laghetto/providers/users_provider.dart';
 import 'package:piscine_laghetto/widgets/custom_dialog.dart';
-import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../global_class.dart' as Globals;
+
+enum Status { DEFAULT, LOADING, DONE }
 
 class EditRepositoryScreen extends StatefulWidget {
   const EditRepositoryScreen({Key? key}) : super(key: key);
@@ -814,10 +815,18 @@ class _EditRepositoryScreenState extends State<EditRepositoryScreen> {
                                           editFolder(
                                             context,
                                             folder.repoid,
-                                          );
+                                          ).whenComplete(() => Future.delayed(
+                                                  Duration(seconds: 1), () {
+                                                Navigator.pop(context);
+                                              }));
                                         else
                                           editFile(context, type, folder.repoid,
-                                              file);
+                                                  file)
+                                              .whenComplete(() =>
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    Navigator.pop(context);
+                                                  }));
                                       }
                                     },
                                     child: Center(

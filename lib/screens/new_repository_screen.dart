@@ -8,11 +8,12 @@ import 'package:piscine_laghetto/providers/group_provider.dart';
 import 'package:piscine_laghetto/providers/tags_provider.dart';
 import 'package:piscine_laghetto/providers/users_provider.dart';
 import 'package:piscine_laghetto/widgets/custom_dialog.dart';
-import 'package:piscine_laghetto/widgets/support_dialog.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../global_class.dart' as Globals;
+
+enum Status { DEFAULT, LOADING, DONE }
 
 class NewRepositoryScreen extends StatefulWidget {
   static const routeName = '/new-repository';
@@ -176,7 +177,7 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
 
     print(response.statusCode);
 
-     if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final respStr = await response.stream.bytesToString();
       var body = jsonDecode(respStr) as Map<String, dynamic>;
       bool success = body['success'];
@@ -767,7 +768,7 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                   ],
                                 ),
                               ),
-                               SizedBox(
+                              SizedBox(
                                 height: 45,
                               ),
                               if (status == Status.LOADING)
@@ -793,10 +794,18 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                       if (isValid) {
                                         _formKey.currentState!.save();
                                         if (type == FileItem.TYPE_FOLDER)
-                                          newFolder(context, type);
+                                          newFolder(context, type).whenComplete(
+                                              () => Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    Navigator.pop(context);
+                                                  }));
                                         else
-                                          // if(file.existsSync())
-                                          newFile(context, type, file);
+                                          newFile(context, type, file)
+                                              .whenComplete(() =>
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    Navigator.pop(context);
+                                                  }));
                                       }
                                     },
                                     child: Center(

@@ -24,7 +24,7 @@ class DeleteDialog extends StatefulWidget {
 class _DeleteDialogState extends State<DeleteDialog> {
   Status status = Status.DEFAULT;
 
-  Future<void> deleteUser(context, {int retry = 0}) async {
+  Future<void> delete(context, {int retry = 0}) async {
     setState(() {
       status = Status.LOADING;
     });
@@ -62,7 +62,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
     } else if (response.statusCode == 401 && retry == 0) {
       print('___TRY REFRESH TOKEN');
       await Globals.refreshToken()
-          .whenComplete(() => deleteUser(context, retry: 1));
+          .whenComplete(() => delete(context, retry: 1));
     } else {
       print('___HTTP ERROR DELETE USER');
       Navigator.pop(context);
@@ -133,7 +133,10 @@ class _DeleteDialogState extends State<DeleteDialog> {
                   ),
                 ),
                 onPressed: () {
-                  deleteUser(context);
+                  delete(context).whenComplete(
+                      () => Future.delayed(Duration(seconds: 1), () {
+                            Navigator.pop(context);
+                          }));
                 },
                 child: Container(
                     width: double.infinity,

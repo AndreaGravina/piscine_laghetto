@@ -110,12 +110,8 @@ class _NewGroupDialogState extends State<NewGroupDialog> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Aggiungi gruppo',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                              ),
+                              Text('Aggiungi gruppo',
+                                  style: Theme.of(context).textTheme.headline2),
                               SizedBox(
                                 height: 15,
                               ),
@@ -161,7 +157,11 @@ class _NewGroupDialogState extends State<NewGroupDialog> {
                                       FocusScope.of(context).unfocus();
                                       if (isValid) {
                                         _formKey.currentState!.save();
-                                        saveGroup(context);
+                                        saveGroup(context).whenComplete(() =>
+                                            Future.delayed(Duration(seconds: 1),
+                                                () {
+                                              Navigator.pop(context);
+                                            }));
                                       }
                                     },
                                     child: Center(

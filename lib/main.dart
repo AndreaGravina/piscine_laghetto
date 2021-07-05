@@ -1,4 +1,5 @@
 import 'package:piscine_laghetto/providers/tags_provider.dart';
+import 'package:piscine_laghetto/screens/support_screen.dart';
 import 'package:piscine_laghetto/screens/user_detail_screen.dart';
 import './providers/auth_status.dart';
 import './providers/file_provider.dart';
@@ -99,6 +100,7 @@ class MyApp extends StatelessWidget {
               NewUserScreen.routeName: (ctx) => NewUserScreen(),
               NewRepositoryScreen.routeName: (ctx) => NewRepositoryScreen(),
               UserDetailScreen.routeName: (ctx) => UserDetailScreen(),
+              SupportScreen.routeName: (ctx) => SupportScreen(),
             }));
   }
 }
