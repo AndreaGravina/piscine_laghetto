@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.piscine_laghetto">
+    package="com.dieffetech.piscineLaghetto">
    <application
         android:label="Piscine Laghetto"
         android:icon="@mipmap/launcher_icon">

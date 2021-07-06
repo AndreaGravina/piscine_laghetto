@@ -43,8 +43,9 @@ dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path_android: "images/icon_laghetto.png"
-  image_path_ios: "images/icon_pl_ios.jpg"
+  image_path: "images/icon_pl_ios.jpg"
+  #image_path_android: "images/icon_laghetto.png"
+  #image_path_ios: "images/icon_pl_ios.jpg"
 
 
 dev_dependencies:
