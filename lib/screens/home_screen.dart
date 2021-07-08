@@ -115,9 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                             height: 40,
                             child: GestureDetector(
-                              onTap: () => Provider.of<FileProvider>(context,
-                                      listen: false)
-                                  .getFiles(),
+                              onTap: () {
+                                _searchController.text = '';
+                                Provider.of<FileProvider>(context,
+                                        listen: false)
+                                    .getFiles();
+                              },
                               child: Image.asset(
                                 'images/logo.png',
                                 fit: BoxFit.contain,
@@ -281,22 +284,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (currentFolder != null)
-                          IconButton(
+                          Container(
                               constraints:
                                   BoxConstraints(minWidth: 50, maxWidth: 50),
-                              onPressed: () {
-                                setState(() {
-                                  if (parent != null)
-                                    Provider.of<FileProvider>(context,
-                                            listen: false)
-                                        .getFiles(folderidfk: parent.repoid);
-                                  else
-                                    Provider.of<FileProvider>(context,
-                                            listen: false)
-                                        .getFiles();
-                                });
-                              },
-                              icon: Icon(
+                             
+                              child: Icon(
                                 Icons.arrow_back,
                                 color: Colors.black,
                               )),

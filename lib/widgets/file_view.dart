@@ -169,7 +169,7 @@ class _FileViewState extends State<FileView> {
   Widget build(BuildContext context) {
     var files = Provider.of<FileProvider>(context).fileList;
     if (files.length == 0) {
-      return Center(heightFactor: 15, child: Text('Nessun File trovato', style: TextStyle(color: Colors.grey, fontSize: 18),));
+      return Center(heightFactor: 15, child: Text('Nessun Elemento trovato', style: TextStyle(color: Colors.grey, fontSize: 18),));
     } else {
       if (widget.listView) {
         if (!widget.stats)
