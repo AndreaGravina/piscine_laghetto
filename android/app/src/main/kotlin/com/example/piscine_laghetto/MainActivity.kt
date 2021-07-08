@@ -1,4 +1,4 @@
-package com.example.piscine_laghetto
+package com.dieffetech.piscineLaghetto
 
 import io.flutter.embedding.android.FlutterActivity
 

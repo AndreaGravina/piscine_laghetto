@@ -168,53 +168,57 @@ class _FileViewState extends State<FileView> {
   @override
   Widget build(BuildContext context) {
     var files = Provider.of<FileProvider>(context).fileList;
-    if (widget.listView) {
-      if (!widget.stats)
-        return ListView.builder(
-            padding: EdgeInsets.zero,
+    if (files.length == 0) {
+      return Center(heightFactor: 15, child: Text('Nessun File trovato', style: TextStyle(color: Colors.grey, fontSize: 18),));
+    } else {
+      if (widget.listView) {
+        if (!widget.stats)
+          return ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: AlwaysScrollableScrollPhysics(),
+              controller: controller,
+              itemCount: files.length + 1,
+              itemBuilder: (ctx, index) {
+                if (index == files.length)
+                  return Container(
+                    height: 60,
+                  );
+                else
+                  return InkWell(
+                      onTap: () {
+                        onRepositoryTap(files[index]);
+                      },
+                      child: ListStatsItem(
+                          file: files[index],
+                          image: pickIconFile(files[index].extension)));
+              });
+        else
+          return ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: widget.statsFileList.length,
+              itemBuilder: (ctx, index) {
+                return ListItem(
+                    file: widget.statsFileList[index],
+                    image: pickIconFile(widget.statsFileList[index].extension));
+              });
+      } else
+        return GridView.builder(
             physics: AlwaysScrollableScrollPhysics(),
             controller: controller,
-            itemCount: files.length + 1,
+            padding: EdgeInsets.all(25),
+            itemCount: files.length,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200, mainAxisSpacing: 15),
             itemBuilder: (ctx, index) {
-              if (index == files.length)
-                return Container(
-                  height: 60,
-                );
-              else
-                return InkWell(
-                    onTap: () {
-                      onRepositoryTap(files[index]);
-                    },
-                    child: ListStatsItem(
-                        file: files[index],
-                        image: pickIconFile(files[index].extension)));
+              return GestureDetector(
+                onTap: () => onRepositoryTap(files[index]),
+                child: GridItem(
+                  file: files[index],
+                  image: pickIconFile(files[index].extension),
+                ),
+              );
             });
-      else
-        return ListView.builder(
-            padding: EdgeInsets.zero,
-            physics: AlwaysScrollableScrollPhysics(),
-            itemCount: widget.statsFileList.length,
-            itemBuilder: (ctx, index) {
-              return ListItem(
-                  file: widget.statsFileList[index],
-                  image: pickIconFile(widget.statsFileList[index].extension));
-            });
-    } else
-      return GridView.builder(
-          physics: AlwaysScrollableScrollPhysics(),
-          controller: controller,
-          padding: EdgeInsets.all(25),
-          itemCount: files.length,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200, mainAxisSpacing: 15),
-          itemBuilder: (ctx, index) {
-            return GestureDetector(
-              onTap: () => onRepositoryTap(files[index]),
-              child: GridItem(
-                file: files[index],
-                image: pickIconFile(files[index].extension),
-              ),
-            );
-          });
+    }
   }
 }

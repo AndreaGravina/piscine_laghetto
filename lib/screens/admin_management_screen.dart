@@ -31,77 +31,58 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: Color(0xff229dec),
-          toolbarHeight: 0,
-          title: Container(),
-          elevation: 0.0,
-        ),
-        backgroundColor: Colors.white,
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: Container(
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-          height: 70,
-          width: 70,
-          padding: EdgeInsets.all(1),
-          child: FloatingActionButton(
-            backgroundColor: const Color(0xFF0375fe),
-            onPressed: () {
-              Navigator.of(context).pushNamed(NewUserScreen.routeName,
-                  arguments: UserClass.ROLE_ADMIN);
-            },
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 40,
-            ),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              colors: [
+                Color(0xFF3bbddc),
+                Color(0xFF0375fe),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+            )),
           ),
-        ),
-        body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 5, bottom: 20, left: 5),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                colors: [
-                  Color(0xFF3bbddc),
-                  Color(0xFF0375fe),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Gestione Admin',
-                          style: Theme.of(context).textTheme.headline1,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 27,
-                  ),
-                  Container(
+          Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                centerTitle: true,
+                title: Text(
+                  'Gestione Admin',
+                  style: Theme.of(context).textTheme.headline1,
+                )),
+            backgroundColor: Colors.transparent,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: Container(
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+              height: 70,
+              width: 70,
+              padding: EdgeInsets.all(1),
+              child: FloatingActionButton(
+                backgroundColor: const Color(0xFF0375fe),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(NewUserScreen.routeName,
+                      arguments: UserClass.ROLE_ADMIN);
+                },
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+            ),
+            body: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 5, bottom: 20, left: 5),
+                  color: Colors.transparent,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
                     height: 45,
                     width: mediaQuery.width * 0.9,
                     child: TextField(
@@ -140,42 +121,51 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                           fillColor: Colors.white,
                         )),
                   ),
-                ],
-              ),
-            ),
-            Container(
-                child: Column(
-              children: [
-                Container(
-                  height: 65,
-                  child: Row(
-                    children: [
-                      Flexible(
-                          fit: FlexFit.tight,
-                          flex: 1,
-                          child: Container(child: Container())),
-                      Flexible(
-                          fit: FlexFit.tight,
-                          flex: 1,
-                          child: Container(child: Text('Nome'))),
-                      Flexible(
-                          fit: FlexFit.tight,
-                          flex: 1,
-                          child: Container(child: Text('Cognome'))),
-                      SizedBox(
-                        width: 110,
-                      )
-                    ],
-                  ),
                 ),
-                Divider(
-                  height: 0,
-                )
+                Container(
+                    child: Column(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      height: 65,
+                      child: Row(
+                        children: [
+                          Flexible(
+                              fit: FlexFit.tight,
+                              flex: 1,
+                              child: Container(child: Container())),
+                          Flexible(
+                              fit: FlexFit.tight,
+                              flex: 1,
+                              child: Container(child: Text('Nome'))),
+                          Flexible(
+                              fit: FlexFit.tight,
+                              flex: 1,
+                              child: Container(child: Text('Cognome'))),
+                          SizedBox(
+                            width: 110,
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      height: 0,
+                    )
+                  ],
+                )),
+                Expanded(
+                    child: Stack(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                    ),
+                    AdminListView(),
+                  ],
+                )),
               ],
-            )),
-            Expanded(child: AdminListView()),
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
