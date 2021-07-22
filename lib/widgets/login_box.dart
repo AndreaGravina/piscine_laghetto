@@ -215,23 +215,9 @@ class _LoginBoxState extends State<LoginBox>
                               autocorrect: false,
                               textCapitalization: TextCapitalization.none,
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.5)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.5)),
-                                  filled: true,
                                   hintStyle:
                                       TextStyle(color: Color(0xFF979797)),
                                   fillColor: Color(0xFFe8f0fe),
-                                  errorMaxLines: 5,
                                   hintText:
                                       '${mode == Mode.LOGIN || mode == Mode.FORGOT ? 'Username' : 'Nuova Password'}'),
                               obscureText: mode == Mode.FIRSTLOG,
@@ -281,20 +267,6 @@ class _LoginBoxState extends State<LoginBox>
                                   enabled: mode == Mode.LOGIN ||
                                       mode == Mode.FIRSTLOG,
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      filled: true,
-                                      errorMaxLines: 5,
                                       hintStyle:
                                           TextStyle(color: Color(0xFF979797)),
                                       fillColor: Color(0xFFe8f0fe),

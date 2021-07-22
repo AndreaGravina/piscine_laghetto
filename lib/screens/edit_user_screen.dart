@@ -207,19 +207,6 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                 textCapitalization: TextCapitalization.none,
                                 initialValue: user.name,
                                 decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    filled: true,
                                     hintStyle:
                                         TextStyle(color: Color(0xFF979797)),
                                     hintText: 'Nome'),
@@ -243,19 +230,6 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                 textCapitalization: TextCapitalization.none,
                                 initialValue: user.surname,
                                 decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    filled: true,
                                     hintStyle:
                                         TextStyle(color: Color(0xFF979797)),
                                     hintText: 'Cognome'),
@@ -324,19 +298,6 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                   textCapitalization: TextCapitalization.none,
                                   initialValue: user.businessName,
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      filled: true,
                                       hintStyle:
                                           TextStyle(color: Color(0xFF979797)),
                                       hintText: 'Ragione sociale'),
@@ -423,9 +384,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                 obscureText: true,
                                 controller: _passwordController,
                                 validator: (value) {
-                                  if (value!.isEmpty ||
-                                      value.length < 8 ||
-                                      !Globals.validatePassword(value))
+                                  if (value!.isNotEmpty && !Globals.validatePassword(value))
                                     return 'La password deve contenere almeno : Un carattere in maiuscolo Un carattere speciale Un carattere numerico, e 8 caratteri';
                                 },
                                 onSaved: (value) {
@@ -435,19 +394,6 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               SizedBox(height: 15),
                               TextFormField(
                                 decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    filled: true,
                                     hintStyle:
                                         TextStyle(color: Color(0xFF979797)),
                                     hintText: 'Conferma password'),

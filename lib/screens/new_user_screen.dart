@@ -310,19 +310,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                   cursorColor: Theme.of(context).primaryColor,
                                   textCapitalization: TextCapitalization.none,
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.5)),
-                                      filled: true,
                                       enabled: role == UserClass.ROLE_USER,
                                       hintStyle:
                                           TextStyle(color: Color(0xFF979797)),
@@ -387,8 +374,9 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                 key: Key('newuser8'),
                                 autocorrect: false,
                                 textCapitalization: TextCapitalization.none,
-                                decoration:
-                                    InputDecoration(hintText: 'Password*'),
+                                decoration: InputDecoration(
+                                  hintText: 'Password*',
+                                ),
                                 obscureText: true,
                                 controller: _passwordController,
                                 validator: (value) {
@@ -403,19 +391,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
                               TextFormField(
                                 key: Key('newuser9'),
                                 decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.5)),
-                                    filled: true,
                                     hintStyle:
                                         TextStyle(color: Color(0xFF979797)),
                                     hintText: 'Conferma password'),

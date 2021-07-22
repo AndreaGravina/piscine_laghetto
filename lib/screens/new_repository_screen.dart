@@ -565,10 +565,8 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                               TextCapitalization.none,
                                           initialValue: fileName,
                                           decoration: InputDecoration(
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 20,
-                                                      horizontal: 10),
+                                              contentPadding: EdgeInsets.symmetric(
+                                                  vertical: 20, horizontal: 10),
                                               errorStyle: TextStyle(
                                                   color: Colors.red.shade700),
                                               errorBorder: OutlineInputBorder(
@@ -579,7 +577,7 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                                           Radius.circular(10)),
                                                   borderSide: BorderSide(
                                                       color: Colors.red,
-                                                      width: 1.0)),
+                                                      width: 1)),
                                               disabledBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.only(
                                                       topLeft:
@@ -589,11 +587,9 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                                   borderSide: BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0)),
-                                              filled: true,
-                                              //    errorMaxLines: 2,
                                               enabled: false,
-                                              hintStyle: TextStyle(
-                                                  color: Color(0xFF979797)),
+                                              hintStyle:
+                                                  TextStyle(color: Color(0xFF979797)),
                                               hintText: 'Scegli il file*'),
                                           style: TextStyle(
                                               color: Color(0xFF979797)),

@@ -64,7 +64,14 @@ class MyApp extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide:
                             BorderSide(color: Colors.transparent, width: 1.5)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.red, width: 1)),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.red, width: 1)),
                     filled: true,
+                    errorMaxLines: 5,
                     hintStyle: TextStyle(color: Color(0xFF979797))),
                 textTheme: TextTheme(
                   headline1: TextStyle(
@@ -77,7 +84,8 @@ class MyApp extends StatelessWidget {
                       fontSize: 19,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
-                  headline3: TextStyle(fontFamily: 'Muli', fontSize: 16, color: Colors.black),
+                  headline3: TextStyle(
+                      fontFamily: 'Muli', fontSize: 16, color: Colors.black),
                   headline4: TextStyle(
                       fontFamily: 'Muli', fontSize: 13, color: Colors.black),
                   headline5: TextStyle(
