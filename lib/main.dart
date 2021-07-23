@@ -52,9 +52,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'Piscine Laghetto',
             theme: ThemeData(
-                // primaryColor: Color(0xFF4dd2ff),
                 primaryColor: Color(0xFF0375fe),
                 accentColor: Color(0xffe6e6e6),
+                fontFamily: 'Muli',
                 inputDecorationTheme: InputDecorationTheme(
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -75,21 +75,16 @@ class MyApp extends StatelessWidget {
                     hintStyle: TextStyle(color: Color(0xFF979797))),
                 textTheme: TextTheme(
                   headline1: TextStyle(
-                      fontFamily: 'Muli',
                       fontSize: 26,
                       color: Colors.white,
                       fontWeight: FontWeight.w800),
                   headline2: TextStyle(
-                      fontFamily: 'Muli',
                       fontSize: 19,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
-                  headline3: TextStyle(
-                      fontFamily: 'Muli', fontSize: 16, color: Colors.black),
-                  headline4: TextStyle(
-                      fontFamily: 'Muli', fontSize: 13, color: Colors.black),
+                  headline3: TextStyle(fontSize: 16, color: Colors.black),
+                  headline4: TextStyle(fontSize: 13, color: Colors.black),
                   headline5: TextStyle(
-                      fontFamily: 'Muli',
                       fontSize: 12,
                       color: Colors.black,
                       fontWeight: FontWeight.w600),
