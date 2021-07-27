@@ -35,9 +35,9 @@ class NotificationListItem extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
           padding: EdgeInsets.all(20),
-          height: 90,
+          height: 110,
           width: double.infinity,
-          child: Container(
+          child: Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
