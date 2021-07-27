@@ -456,8 +456,10 @@ class _NewUserScreenState extends State<NewUserScreen> {
                                       if (isValid) {
                                         _formKey.currentState!.save();
                                         createUser(context, role).whenComplete(
-                                            () => Future.delayed(
-                                                    Duration(seconds: 1), () {
+                                            () =>
+                                                Future.delayed(
+                                                    Duration(milliseconds: 500),
+                                                    () {
                                                   Navigator.pop(context);
                                                 }));
                                       }

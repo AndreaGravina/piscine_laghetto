@@ -14,7 +14,7 @@ class SupportScreen extends StatefulWidget {
 }
 
 class _SupportScreenState extends State<SupportScreen> {
-   final GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
   Map<String, String> _submitData = {
     'fullName': '',
     'email': '',
@@ -80,7 +80,6 @@ class _SupportScreenState extends State<SupportScreen> {
       });
     }
   }
- 
 
   @override
   void initState() {
@@ -90,7 +89,7 @@ class _SupportScreenState extends State<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
-    
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Stack(children: [
@@ -121,7 +120,7 @@ class _SupportScreenState extends State<SupportScreen> {
               elevation: 0.0,
               centerTitle: true,
               title: Text(
-                'Contattaci' ,
+                'Contattaci',
                 style: Theme.of(context).textTheme.headline1,
               )),
           backgroundColor: Colors.transparent,
@@ -175,156 +174,154 @@ class _SupportScreenState extends State<SupportScreen> {
                               SizedBox(
                                 height: 35,
                               ),
-                               SizedBox(
-                                  height: 15,
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                autocorrect: false,
+                                cursorColor: Theme.of(context).primaryColor,
+                                textCapitalization: TextCapitalization.none,
+                                decoration: InputDecoration(
+                                  hintText: 'Oggetto',
                                 ),
-                                TextFormField(
-                                  autocorrect: false,
-                                  cursorColor: Theme.of(context).primaryColor,
-                                  textCapitalization: TextCapitalization.none,
-                                  decoration: InputDecoration(
-                                    hintText: 'Oggetto',
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Scrivi qualcosa';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) {
+                                  _submitData['obj'] = value!;
+                                },
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                autocorrect: false,
+                                cursorColor: Theme.of(context).primaryColor,
+                                textCapitalization: TextCapitalization.none,
+                                decoration: InputDecoration(
+                                  hintText: 'Email',
+                                ),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value!.isEmpty || !value.contains('@')) {
+                                    return 'Email non valida';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) {
+                                  _submitData['email'] = value!;
+                                },
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                autocorrect: false,
+                                scrollPadding:
+                                    const EdgeInsets.only(bottom: 90.0),
+                                cursorColor: Theme.of(context).primaryColor,
+                                minLines: 5,
+                                maxLines: 10,
+                                scrollPhysics: BouncingScrollPhysics(),
+                                textCapitalization: TextCapitalization.none,
+                                decoration: InputDecoration(
+                                  hintText: 'Descrizione',
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Scrivi qualcosa';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) {
+                                  _submitData['description'] = value!;
+                                },
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              if (status == Status.LOADING)
+                                Center(
+                                  child: CircularProgressIndicator(
+                                    color: Color(0xFF0375fe),
                                   ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Scrivi qualcosa';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
-                                    _submitData['obj'] = value!;
-                                  },
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                TextFormField(
-                                  autocorrect: false,
-                                  cursorColor: Theme.of(context).primaryColor,
-                                  textCapitalization: TextCapitalization.none,
-                                  decoration: InputDecoration(
-                                    hintText: 'Email',
-                                  ),
-                                  keyboardType: TextInputType.emailAddress,
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        !value.contains('@')) {
-                                      return 'Email non valida';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
-                                    _submitData['email'] = value!;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                TextFormField(
-                                  autocorrect: false,
-                                  scrollPadding:
-                                      const EdgeInsets.only(bottom: 90.0),
-                                  cursorColor: Theme.of(context).primaryColor,
-                                  minLines: 5,
-                                  maxLines: 10,
-                                  scrollPhysics: BouncingScrollPhysics(),
-                                  textCapitalization: TextCapitalization.none,
-                                  decoration: InputDecoration(
-                                    hintText: 'Descrizione',
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Scrivi qualcosa';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (value) {
-                                    _submitData['description'] = value!;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                ),
-                                if (status == Status.LOADING)
-                                  Center(
-                                    child: CircularProgressIndicator(
-                                      color: Color(0xFF0375fe),
-                                    ),
-                                  ),
-                                if (status == Status.DEFAULT)
-                                  Container(
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          elevation:
-                                              MaterialStateProperty.all(3),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                            const Color(0xFF0375fe),
-                                          )),
-                                      onPressed: () {
-                                        var isValid =
-                                            _formKey.currentState!.validate();
-                                        FocusScope.of(context).unfocus();
-                                        if (isValid) {
-                                          _formKey.currentState!.save();
-                                          sendEmail(
-                                              context,
-                                              _submitData['obj']!,
-                                              _submitData['email']!,
-                                              _submitData['description']!).whenComplete(() => Future.delayed(Duration(seconds: 1), (){
-                                                Navigator.pop(context);
-                                              }));
-                                        }
-                                      },
-                                      child: Center(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            (Icons.add_circle_outline),
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            'INVIA',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                  ),
-                                if (status == Status.DONE)
-                                  Container(
-                                    height: 50,
-                                    color: Colors.green,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                              if (status == Status.DEFAULT)
+                                Container(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        elevation: MaterialStateProperty.all(3),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          const Color(0xFF0375fe),
+                                        )),
+                                    onPressed: () {
+                                      var isValid =
+                                          _formKey.currentState!.validate();
+                                      FocusScope.of(context).unfocus();
+                                      if (isValid) {
+                                        _formKey.currentState!.save();
+                                        sendEmail(
+                                                context,
+                                                _submitData['obj']!,
+                                                _submitData['email']!,
+                                                _submitData['description']!)
+                                            .whenComplete(() => Future.delayed(
+                                                    Duration(milliseconds: 500), () {
+                                                  Navigator.pop(context);
+                                                }));
+                                      }
+                                    },
+                                    child: Center(
+                                        child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.done,
+                                          (Icons.add_circle_outline),
                                           color: Colors.white,
                                         ),
                                         SizedBox(
                                           width: 5,
                                         ),
                                         Text(
-                                          'FATTO',
+                                          'INVIA',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],
-                                    ),
+                                    )),
                                   ),
-                                SizedBox(
-                                  height: 30,
                                 ),
+                              if (status == Status.DONE)
+                                Container(
+                                  height: 50,
+                                  color: Colors.green,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.done,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        'FATTO',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              SizedBox(
+                                height: 30,
+                              ),
                             ],
                           ),
                         ),

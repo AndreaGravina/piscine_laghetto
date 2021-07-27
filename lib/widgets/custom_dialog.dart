@@ -19,7 +19,7 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(
-        height: 150,
+        height: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +39,7 @@ class CustomDialog extends StatelessWidget {
             ),
             Text(
               text,
-              style: TextStyle(fontSize: 18, color: Colors.grey.shade600),
+              style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
               textAlign: TextAlign.center,
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:piscine_laghetto/providers/auth_status.dart';
 import 'package:piscine_laghetto/providers/group_provider.dart';
 import 'package:piscine_laghetto/providers/users_provider.dart';
 import 'package:piscine_laghetto/widgets/custom_dialog.dart';
@@ -36,7 +37,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
     'status': 1,
   };
 
-  Future<void> editUser(context, UserClass user, {int retry = 0}) async {
+  Future<void> editUser(context, UserClass user, bool isMyAccount,
+      {int retry = 0}) async {
     setState(() {
       status = Status.LOADING;
     });
@@ -77,6 +79,10 @@ class _EditUserScreenState extends State<EditUserScreen> {
       } else {
         Globals.updateLog(body['log']['logid'], body['log']['time']);
         print('___EDIT USER SUCCESS');
+        if (isMyAccount) {
+          Provider.of<AuthStatus>(context, listen: false).editInfo(_submitData['username'],
+              _submitData['surname'], _submitData['name']);
+        }
         setState(() {
           status = Status.DONE;
         });
@@ -84,7 +90,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
     } else if (response.statusCode == 401 && retry == 0) {
       print('___TRY REFRESH TOKEN');
       await Globals.refreshToken()
-          .whenComplete(() => editUser(context, user, retry: 1));
+          .whenComplete(() => editUser(context, user, isMyAccount, retry: 1));
     } else {
       print('___HTTP ERROR EDIT USER');
       showDialog(
@@ -114,7 +120,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
         groupData.add({'display': group.name, 'value': group.groupid});
       });
     }
-    print(user.groupsId.toString());
+    bool isMyAccount =
+        (Provider.of<AuthStatus>(context).userInfo['userid'] == user.userid);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -252,8 +259,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                 autocorrect: false,
                                 cursorColor: Theme.of(context).primaryColor,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Email'),
+                                decoration: InputDecoration(hintText: 'Email'),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value!.isEmpty || !value.contains('@')) {
@@ -274,8 +280,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                 cursorColor: Theme.of(context).primaryColor,
                                 textCapitalization: TextCapitalization.none,
                                 initialValue: user.username,
-                                decoration: InputDecoration(
-                                    hintText: 'Username'),
+                                decoration:
+                                    InputDecoration(hintText: 'Username'),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Scrivi qualcosa';
@@ -318,8 +324,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                   initialValue: user.vatNumber,
                                   cursorColor: Theme.of(context).primaryColor,
                                   textCapitalization: TextCapitalization.none,
-                                  decoration: InputDecoration(
-                                      hintText: 'Partita Iva'),
+                                  decoration:
+                                      InputDecoration(hintText: 'Partita Iva'),
                                   onSaved: (value) {
                                     if (user.roleidfk == UserClass.ROLE_USER)
                                       _submitData['vat_number'] = value!;
@@ -379,12 +385,13 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               TextFormField(
                                 autocorrect: false,
                                 textCapitalization: TextCapitalization.none,
-                                decoration: InputDecoration(
-                                    hintText: 'Nuova password'),
+                                decoration:
+                                    InputDecoration(hintText: 'Nuova password'),
                                 obscureText: true,
                                 controller: _passwordController,
                                 validator: (value) {
-                                  if (value!.isNotEmpty && !Globals.validatePassword(value))
+                                  if (value!.isNotEmpty &&
+                                      !Globals.validatePassword(value))
                                     return 'La password deve contenere almeno : Un carattere in maiuscolo Un carattere speciale Un carattere numerico, e 8 caratteri';
                                 },
                                 onSaved: (value) {
@@ -458,11 +465,11 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                       FocusScope.of(context).unfocus();
                                       if (isValid) {
                                         _formKey.currentState!.save();
-                                        editUser(context, user).whenComplete(() =>
-                                                  Future.delayed(
-                                                      Duration(seconds: 1), () {
-                                                    Navigator.pop(context);
-                                                  }));
+                                        editUser(context, user, isMyAccount)
+                                            .whenComplete(() => Future.delayed(
+                                                    Duration(milliseconds: 500), () {
+                                                  Navigator.pop(context);
+                                                }));
                                       }
                                     },
                                     child: Center(

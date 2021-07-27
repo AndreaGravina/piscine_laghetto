@@ -158,7 +158,7 @@ class _NewGroupDialogState extends State<NewGroupDialog> {
                                       if (isValid) {
                                         _formKey.currentState!.save();
                                         saveGroup(context).whenComplete(() =>
-                                            Future.delayed(Duration(seconds: 1),
+                                            Future.delayed(Duration(milliseconds: 500),
                                                 () {
                                               Navigator.pop(context);
                                             }));

@@ -148,5 +148,10 @@ class AuthStatus with ChangeNotifier {
     return Globals.logged;
   }
 
-  
+  void editInfo(String newUsername, String newSurname, String newName) {
+    userInfo['name'] = newName;
+    userInfo['surname'] = newSurname;
+    userInfo['username'] = newUsername;
+    notifyListeners();
+  }
 }

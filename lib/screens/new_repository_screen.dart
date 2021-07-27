@@ -792,14 +792,14 @@ class _NewRepositoryScreenState extends State<NewRepositoryScreen> {
                                         if (type == FileItem.TYPE_FOLDER)
                                           newFolder(context, type).whenComplete(
                                               () => Future.delayed(
-                                                      Duration(seconds: 1), () {
+                                                      Duration(milliseconds: 500), () {
                                                     Navigator.pop(context);
                                                   }));
                                         else
                                           newFile(context, type, file)
                                               .whenComplete(() =>
                                                   Future.delayed(
-                                                      Duration(seconds: 1), () {
+                                                      Duration(milliseconds: 500), () {
                                                     Navigator.pop(context);
                                                   }));
                                       }

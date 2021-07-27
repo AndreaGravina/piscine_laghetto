@@ -816,7 +816,7 @@ class _EditRepositoryScreenState extends State<EditRepositoryScreen> {
                                             context,
                                             folder.repoid,
                                           ).whenComplete(() => Future.delayed(
-                                                  Duration(seconds: 1), () {
+                                                  Duration(milliseconds: 500), () {
                                                 Navigator.pop(context);
                                               }));
                                         else
@@ -824,7 +824,7 @@ class _EditRepositoryScreenState extends State<EditRepositoryScreen> {
                                                   file)
                                               .whenComplete(() =>
                                                   Future.delayed(
-                                                      Duration(seconds: 1), () {
+                                                      Duration(milliseconds: 500), () {
                                                     Navigator.pop(context);
                                                   }));
                                       }

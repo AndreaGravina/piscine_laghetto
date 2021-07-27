@@ -95,7 +95,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
       content: Container(
-        height: 300,
+        height: 320,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +134,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 ),
                 onPressed: () {
                   delete(context).whenComplete(
-                      () => Future.delayed(Duration(seconds: 1), () {
+                      () => Future.delayed(Duration(milliseconds: 500), () {
                             Navigator.pop(context);
                           }));
                 },
