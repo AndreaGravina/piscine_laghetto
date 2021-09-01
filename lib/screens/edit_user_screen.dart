@@ -80,8 +80,10 @@ class _EditUserScreenState extends State<EditUserScreen> {
         Globals.updateLog(body['log']['logid'], body['log']['time']);
         print('___EDIT USER SUCCESS');
         if (isMyAccount) {
-          Provider.of<AuthStatus>(context, listen: false).editInfo(_submitData['username'],
-              _submitData['surname'], _submitData['name']);
+          Provider.of<AuthStatus>(context, listen: false).editInfo(
+              _submitData['username'],
+              _submitData['surname'],
+              _submitData['name']);
         }
         setState(() {
           status = Status.DONE;
@@ -467,7 +469,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                         _formKey.currentState!.save();
                                         editUser(context, user, isMyAccount)
                                             .whenComplete(() => Future.delayed(
-                                                    Duration(milliseconds: 500), () {
+                                                    Duration(milliseconds: 500),
+                                                    () {
                                                   Navigator.pop(context);
                                                 }));
                                       }
