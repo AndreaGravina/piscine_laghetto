@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .getFiles();
                               },
                               child: Image.asset(
-                                'images/logo.png',
+                                'images/ssw.png',
                                 fit: BoxFit.contain,
                               ),
                             ),

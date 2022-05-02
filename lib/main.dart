@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (ctx) => TagProvider()),
         ],
         child: MaterialApp(
-            title: 'Piscine Laghetto',
+            title: 'Shared Storage',
             theme: ThemeData(
                 primaryColor: Color(0xFF0375fe),
                 accentColor: Color(0xffe6e6e6),

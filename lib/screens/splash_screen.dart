@@ -68,7 +68,7 @@ class _SpashScreenState extends State<SpashScreen> {
                 width: deviceSize.width * 0.5,
                 margin: EdgeInsets.only(bottom: 30),
                 child: Image.asset(
-                  'images/logo.png',
+                  'images/ssw.png',
                   fit: BoxFit.contain,
                 ),
               ),
