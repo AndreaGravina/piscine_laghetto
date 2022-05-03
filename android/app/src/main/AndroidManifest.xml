@@ -2,7 +2,7 @@
     package="com.dieffetech.piscineLaghetto">
    <application
         android:label="Shared Storage"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/s_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
